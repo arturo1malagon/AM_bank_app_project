@@ -3,6 +3,7 @@ function Login(){
   const [status, setStatus]     = React.useState('');
   const [email, setEmail]       = React.useState('');
   const [password, setPassword] = React.useState('');
+  const [GreetingMessage, setGreetingMessage] = React.useState('Please Create Account');
   const [AEmail, setAEmail]     = React.useState(false);
   const [APass, setAPass]       = React.useState(false);
   const ctx = React.useContext(UserContext);  
@@ -16,29 +17,38 @@ function Login(){
       return true;
   }
 
-
-
+  function userExists(email) {
+    return ctx.users.find((item) => {
+      return item.email === email;
+    })
+  }
+  
   function handleCreate(){
     console.log(email,password);
     if (!validate(email,    'email'))    return;
     if (!validate(password, 'password')) return;
-    setShow(false);
 
-    function userExists(email) {
-    return ctx.users.some(function(el) {
-    return el.email === email;
-    }); 
+    setShow(false);
+    console.log(userExists(email));
+
+    if (userExists(email) !== undefined) {
+      setAEmail(true);
+      setGreetingMessage('Welcome Back!');
+    } else {
+      setAEmail(false);
+      setGreetingMessage('Please Create Account'); 
     }
-    console.log(userExists(email)); 
-    setAEmail(userExists(email));
-    console.log({AEmail});
+
+    console.log(AEmail, GreetingMessage);
   }    
+
 
   function clearForm(){
     setEmail('');
     setPassword('');
     setShow(true);
   }
+
 
   return (
     <Card
@@ -55,7 +65,7 @@ function Login(){
               </>
             ):(
               <>
-              <h5>Success</h5>
+              <h5>{GreetingMessage}</h5>
               <button type="submit" className="btn btn-light" onClick={clearForm}>Return</button>
               </>
             )}

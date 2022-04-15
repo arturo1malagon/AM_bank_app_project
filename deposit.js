@@ -39,6 +39,7 @@ function Deposit(){
       body={show ? (  
               <>
               Deposit<br/>
+              <div>Balance: ${ctx.users[0].balance}</div>
               <input type="number" className="form-control" id="deposit" placeholder="Enter value" value={deposit} onChange={e => setDeposit(e.currentTarget.value)} /><br/>
               <button type="submit" className="btn btn-light" onClick={handleCreate}>Deposit</button>
               </>
@@ -46,6 +47,7 @@ function Deposit(){
               <>
               <h5>Success</h5>
               <div>+${deposit}</div>
+              <div>Balance now: ${ctx.users[0].balance}</div>
               <button type="submit" className="btn btn-light" onClick={clearForm}>New deposit</button>
               </>
             )}

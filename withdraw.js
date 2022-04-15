@@ -36,6 +36,7 @@ function Withdraw(){
       body={show ? (  
               <>
               Withdraw<br/>
+              <div>Balance: ${ctx.users[0].balance}</div>
               <input type="number" className="form-control" id="withdraw" placeholder="Enter value" value={withdraw} onChange={e => setWithdraw(e.currentTarget.value)} /><br/>
               <button type="submit" className="btn btn-light" onClick={handleCreate}>Withdraw</button>
               </>
@@ -43,6 +44,7 @@ function Withdraw(){
               <>
               <h5>Success</h5>
               <div>-${withdraw}</div>
+              <div>Balance now: ${ctx.users[0].balance}</div>
               <button type="submit" className="btn btn-light" onClick={clearForm}>New withdraw</button>
               </>
             )}
