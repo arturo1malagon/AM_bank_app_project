@@ -23,6 +23,13 @@ function Login(){
     })
   }
   
+  function UpdateLogin(email) {
+    const objIndex = ctx.users.findIndex(item => item.email === email );
+    ctx.users[objIndex].login = 'yes';
+    console.log(ctx.users[objIndex]);
+  }
+
+
   function handleCreate(){
     console.log(email,password);
     if (!validate(email,    'email'))    return;
@@ -34,6 +41,7 @@ function Login(){
     if (userExists(email) !== undefined) {
       setAEmail(true);
       setGreetingMessage('Welcome Back!');
+      UpdateLogin(email);
     } else {
       setAEmail(false);
       setGreetingMessage('Please Create Account'); 
