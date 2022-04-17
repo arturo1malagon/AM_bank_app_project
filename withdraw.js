@@ -1,63 +1,65 @@
 function Withdraw(){
   const [show, setShow]         = React.useState(true);
   const [status, setStatus]     = React.useState('');
-  const [withdraw, setWithdraw] = React.useState();
-  const [message4, setMessage4] = React.useState('');
-  const [objIndex4, setObjIndex4] = React.useState();
-  const [balance4, setBalance4] = React.useState('');
-  const ctx = React.useContext(UserContext); 
+  const [withdraw, setwithdraw]   = React.useState(0);
+  const [withdrawNumber, setwithdrawNumber]   = React.useState(0);
+  const [message3, setMessage3] = React.useState('');
+  const [objIndex3, setObjIndex3] = React.useState('');
+  const [newBalance, setNewBalance] = React.useState(0);
+  const [lastBalance, setLastBalance] = React.useState(0);
+  const [balance3, setBalance3] = React.useState('');
+  const ctx = React.useContext(UserContext);
+
+
 
   function actualUser(){
-    const objIndex4 = ctx.users.findIndex(item => item.login === 'yes');
-    console.log(objIndex4);
-    return objIndex4;
+    const objIndex3 = ctx.users.findIndex(item => item.login === 'yes');
+    return objIndex3;
   }
 
-  function validate(field, label){
-      if (!field) {
-        setStatus('Error: ' + label);
-        setTimeout(() => setStatus(''),3000);
-        return false;
-      }
-      return true;
+  function calculateNewBalance(withdraw, objindex3, ctx){
+      setwithdrawNumber(Number(withdraw));
+      setLastBalance(Number(ctx.users[objIndex3].balance));
+      setNewBalance(Number(lastBalance-withdrawNumber));
+      return(lastBalance, withdrawNumber, newBalance);
   }
 
   function handleCreate(){
     setShow(false);
-    
-    if (!validate(withdraw,     'withdraw'))     return;
 
     if (actualUser() > -1) {
-      setWithdraw(parseInt(withdraw));
-      setBalance4(parseInt(ctx.users[objIndex4].balance)-withdraw);
-      setMessage4('Your balance is $');
-      setBalance4(JSON.stringify(ctx.users[objIndex4].balance));
+      if (Number(withdraw)<=Number(ctx.users[objIndex3].balance)) {
+          calculateNewBalance(withdraw, objIndex3, ctx);
+          setMessage3('Your balance is $');
+          setBalance3(Number(ctx.users[objIndex3].balance)-Number(withdraw));
+          ctx.users[objIndex3].balance = (Number(ctx.users[objIndex3].balance)-Number(withdraw));
+          console.log(ctx.users[objIndex3]);
+      } else {
+        setMessage3('Not enough funds!, Your balance is $'); 
+      }
     } else {
-      setMessage4('Please login with your email');
+      setMessage3('Please login with your email');
     }
-  }    
+  }
 
   function clearForm(){
-    setWithdraw();
     setShow(true);
   }
 
   return (
     <Card
       bgcolor="success"
-      header="Withdraw"
+      header="withdraw"
       status={status}
-      body={show ? (  
+      body={show ? (
               <>
-              Withdraw<br/>
-              <div>{message4} {balance4}</div>
-              <input type="number" className="form-control" id="withdraw" placeholder="Enter value" value={withdraw} onChange={e => setWithdraw(e.currentTarget.value)} /><br/>
-              <button type="submit" className="btn btn-light" onClick={handleCreate}>Withdraw</button>
+              withdraw<br/>
+              <input type="number" className="form-control" id="withdraw" placeholder="Enter value" value={withdraw} onChange={e => setwithdraw(e.currentTarget.value)} /><br/>
+              <button type="submit" className="btn btn-light" onClick={handleCreate}>Make withdraw</button>
               </>
             ):(
               <>
-              <h5>{message4} {balance4}</h5>
-              <div>Your withdraw was ${withdraw}</div>
+              <h5>{message3} {balance3}</h5>
               <button type="submit" className="btn btn-light" onClick={clearForm}>New withdraw</button>
               </>
             )}

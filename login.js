@@ -36,7 +36,6 @@ function Login(){
     if (!validate(password, 'password')) return;
 
     setShow(false);
-    console.log(userExists(email));
 
     if (userExists(email) !== undefined) {
       setAEmail(true);
@@ -46,8 +45,6 @@ function Login(){
       setAEmail(false);
       setGreetingMessage('Please Create Account'); 
     }
-
-    console.log(AEmail, GreetingMessage);
   }    
 
 

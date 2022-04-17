@@ -2,7 +2,7 @@ function Balance(){
   const [show, setShow]         = React.useState(true);
   const [status, setStatus]     = React.useState('');
   const [message2, setMessage2] = React.useState('');
-  const [objIndex2, setObjIndex2] = React.useState(0);
+  const [objIndex2, setObjIndex2] = React.useState('');
   const [balance2, setBalance2] = React.useState('');
   const ctx = React.useContext(UserContext); 
 
