@@ -16,11 +16,15 @@ function Deposit(){
     const objIndex3 = ctx.users.findIndex(item => item.login === 'yes');
 
     if (objIndex3 > -1) {
-      setBalance3(Number(deposit)+Number(ctx.users[Number(objIndex3)].balance));
-      ctx.users[Number(objIndex3)].balance = (Number(deposit)+Number(ctx.users[Number(objIndex3)].balance));
-      console.log(ctx.users[Number(objIndex3)]);
-      setMessage3('Your balance is $');
-      ctx.users.push({action: 'Deposit',email: (ctx.users[Number(objIndex3)].email),createDate:Date().toLocaleString()});
+      if (Number(deposit)>0) {
+        setBalance3(Number(deposit)+Number(ctx.users[Number(objIndex3)].balance));
+        ctx.users[Number(objIndex3)].balance = (Number(deposit)+Number(ctx.users[Number(objIndex3)].balance));
+        console.log(ctx.users[Number(objIndex3)]);
+        setMessage3('Your balance is $');
+        ctx.users.push({action: 'Deposit',email: (ctx.users[Number(objIndex3)].email),createDate:Date().toLocaleString()});
+      } else {
+        setMessage3('We cannot accept negative deposits');
+      }
     } else {
       setMessage3('Please login with your email');
     }
