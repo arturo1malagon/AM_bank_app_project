@@ -3,7 +3,7 @@ function AllData(){
   return (
       <div className="card">
         <div className="card-header">
-          Created users and balance
+          Created users and their balance
         </div>
         <ul className="list-group list-group-flush">
           <li className="list-group-item">{JSON.stringify(ctx.users)}</li>

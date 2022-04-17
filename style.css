@@ -2,7 +2,6 @@
     color: rgb(148, 241, 203);
 }
 
-.navbar-nav .nav-item.active .nav-link,
 .navbar-nav .nav-item:hover .nav-link {
     color: rgb(148, 241, 203);
     background-color: rgb(8, 64, 187);
