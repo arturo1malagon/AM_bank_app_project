@@ -11,29 +11,17 @@ function Withdraw(){
   const ctx = React.useContext(UserContext);
 
 
-
-  function actualUser(){
-    const objIndex3 = ctx.users.findIndex(item => item.login === 'yes');
-    return objIndex3;
-  }
-
-  function calculateNewBalance(withdraw, objindex3, ctx){
-      setwithdrawNumber(Number(withdraw));
-      setLastBalance(Number(ctx.users[objIndex3].balance));
-      setNewBalance(Number(lastBalance-withdrawNumber));
-      return(lastBalance, withdrawNumber, newBalance);
-  }
-
   function handleCreate(){
     setShow(false);
 
-    if (actualUser() > -1) {
-      if (Number(withdraw)<=Number(ctx.users[objIndex3].balance)) {
-          calculateNewBalance(withdraw, objIndex3, ctx);
+    const objIndex3 = ctx.users.findIndex(item => item.login === 'yes');
+
+    if (objIndex3 > -1) {
+      if (Number(withdraw)<=Number(ctx.users[Number(objIndex3)].balance)) {
+          setBalance3(Number(ctx.users[Number(objIndex3)].balance)-Number(withdraw));
+          ctx.users[Number(objIndex3)].balance = (Number(ctx.users[Number(objIndex3)].balance)-Number(withdraw));
+          console.log(ctx.users[Number(objIndex3)]);
           setMessage3('Your balance is $');
-          setBalance3(Number(ctx.users[objIndex3].balance)-Number(withdraw));
-          ctx.users[objIndex3].balance = (Number(ctx.users[objIndex3].balance)-Number(withdraw));
-          console.log(ctx.users[objIndex3]);
       } else {
         setMessage3('Not enough funds!, Your balance is $'); 
       }

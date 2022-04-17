@@ -10,29 +10,16 @@ function Deposit(){
   const [balance3, setBalance3] = React.useState('');
   const ctx = React.useContext(UserContext);
 
-
-
-  function actualUser(){
-    const objIndex3 = ctx.users.findIndex(item => item.login === 'yes');
-    return objIndex3;
-  }
-
-  function calculateNewBalance(deposit, objindex3, ctx){
-      setDepositNumber(Number(deposit));
-      setLastBalance(Number(ctx.users[objIndex3].balance));
-      setNewBalance(Number(lastBalance+depositNumber));
-      return(lastBalance, depositNumber, newBalance);
-  }
-
   function handleCreate(){
     setShow(false);
 
-    if (actualUser() > -1) {
-      calculateNewBalance(deposit, objIndex3, ctx);
+    const objIndex3 = ctx.users.findIndex(item => item.login === 'yes');
+
+    if (objIndex3 > -1) {
+      setBalance3(Number(deposit)+Number(ctx.users[Number(objIndex3)].balance));
+      ctx.users[Number(objIndex3)].balance = (Number(deposit)+Number(ctx.users[Number(objIndex3)].balance));
+      console.log(ctx.users[Number(objIndex3)]);
       setMessage3('Your balance is $');
-      setBalance3(Number(deposit)+Number(ctx.users[objIndex3].balance));
-      ctx.users[objIndex3].balance = (Number(deposit)+Number(ctx.users[objIndex3].balance));
-      console.log(ctx.users[objIndex3]);
     } else {
       setMessage3('Please login with your email');
     }

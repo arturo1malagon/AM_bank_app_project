@@ -6,18 +6,15 @@ function Balance(){
   const [balance2, setBalance2] = React.useState('');
   const ctx = React.useContext(UserContext); 
 
-  function actualUser(){
-     const objIndex2 = ctx.users.findIndex(item => item.login === 'yes');
-     console.log(objIndex2);
-     return objIndex2;
-  }
-
   function handleCreate(){
     setShow(false);
+    
+    const objIndex2 = ctx.users.findIndex(item => item.login === 'yes');
 
-    if (actualUser() > -1) {
+    if (objIndex2 > -1) {
       setMessage2('Your balance is $');
-      setBalance2(JSON.stringify(ctx.users[objIndex2].balance));
+      setBalance2(JSON.stringify(ctx.users[Number(objIndex2)].balance));
+      console.log(ctx.users[Number(objIndex2)]);
     } else {
       setMessage2('Please login with your email');
     }
