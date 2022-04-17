@@ -41,6 +41,7 @@ function Login(){
       setAEmail(true);
       setGreetingMessage('Welcome Back!');
       UpdateLogin(email);
+      ctx.users.push({action: 'Login',email: email,createDate:Date().toLocaleString()});
     } else {
       setAEmail(false);
       setGreetingMessage('Please Create Account'); 

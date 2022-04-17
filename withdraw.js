@@ -22,6 +22,7 @@ function Withdraw(){
           ctx.users[Number(objIndex3)].balance = (Number(ctx.users[Number(objIndex3)].balance)-Number(withdraw));
           console.log(ctx.users[Number(objIndex3)]);
           setMessage3('Your balance is $');
+          ctx.users.push({action: 'Withdraw',email: (ctx.users[Number(objIndex3)].email),createDate:Date().toLocaleString()});
       } else {
         setMessage3('Not enough funds!, Your balance is $'); 
       }
@@ -33,18 +34,18 @@ function Withdraw(){
   function clearForm(){
     setShow(true);
   }
-
+  
   return (
     <Card
       bgcolor="success"
-      header="withdraw"
+      header="Withdraw"
       status={status}
       body={show ? (
               <>
               Withdraw<br/>
               <input type="number" className="form-control" id="withdraw" placeholder="Enter value" value={withdraw} onChange={e => setwithdraw(e.currentTarget.value)} /><br/>
               <button type="submit" className="btn btn-light" onClick={handleCreate}>Make withdraw</button>
-              </>
+             </>
             ):(
               <>
               <h5>{message3} {balance3}</h5>

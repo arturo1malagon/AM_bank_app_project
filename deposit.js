@@ -20,6 +20,7 @@ function Deposit(){
       ctx.users[Number(objIndex3)].balance = (Number(deposit)+Number(ctx.users[Number(objIndex3)].balance));
       console.log(ctx.users[Number(objIndex3)]);
       setMessage3('Your balance is $');
+      ctx.users.push({action: 'Deposit',email: (ctx.users[Number(objIndex3)].email),createDate:Date().toLocaleString()});
     } else {
       setMessage3('Please login with your email');
     }
@@ -36,7 +37,7 @@ function Deposit(){
       status={status}
       body={show ? (
               <>
-              deposit<br/>
+              Deposit<br/>
               <input type="number" className="form-control" id="deposit" placeholder="Enter value" value={deposit} onChange={e => setDeposit(e.currentTarget.value)} /><br/>
               <button type="submit" className="btn btn-light" onClick={handleCreate}>Make Deposit</button>
               </>

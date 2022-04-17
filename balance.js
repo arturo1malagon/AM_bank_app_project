@@ -15,6 +15,7 @@ function Balance(){
       setMessage2('Your balance is $');
       setBalance2(JSON.stringify(ctx.users[Number(objIndex2)].balance));
       console.log(ctx.users[Number(objIndex2)]);
+      ctx.users.push({action: 'Check balance',email: (ctx.users[Number(objIndex2)].email),createDate:Date().toLocaleString()});
     } else {
       setMessage2('Please login with your email');
     }
