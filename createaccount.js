@@ -20,7 +20,7 @@ function CreateAccount(){
     if (!validate(name,     'name'))     return;
     if (!validate(email,    'email'))    return;
     if (!validate(password, 'password')) return;
-    ctx.users.push({createDate:Date().toLocaleString(),name,email,password,login:"no",balance:(parseInt(Math.random() * 1000))});
+    ctx.users.push({name,email,password,login:"no",balance:(parseInt(Math.random() * 1000)),createDate:Date().toLocaleString()});
     setShow(false);
   }    
 
