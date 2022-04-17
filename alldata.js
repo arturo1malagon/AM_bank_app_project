@@ -1,9 +1,14 @@
 function AllData(){
   const ctx = React.useContext(UserContext);
   return (
-    <>
-    <h5>All Data in Store</h5>
-    {JSON.stringify(ctx)}<br/>
-    </>
-  );
-}
+      <div className="card">
+        <div className="card-header">
+          All transacctions during this session
+        </div>
+        <ul className="list-group list-group-flush">
+          <li className="list-group-item">{JSON.stringify(ctx.users)}</li>
+        </ul>
+      </div>
+  )
+} 
+

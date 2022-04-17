@@ -41,7 +41,7 @@ function Withdraw(){
       status={status}
       body={show ? (
               <>
-              withdraw<br/>
+              Withdraw<br/>
               <input type="number" className="form-control" id="withdraw" placeholder="Enter value" value={withdraw} onChange={e => setwithdraw(e.currentTarget.value)} /><br/>
               <button type="submit" className="btn btn-light" onClick={handleCreate}>Make withdraw</button>
               </>
